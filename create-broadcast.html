@@ -1,0 +1,53 @@
+<script src="https://apis.google.com/js/api.js"></script>
+<script>
+  /**
+   * Sample JavaScript code for youtube.liveBroadcasts.insert
+   * See instructions for running APIs Explorer code samples locally:
+   * https://developers.google.com/explorer-help/guides/code_samples#javascript
+   */
+
+  function authenticate() {
+    return gapi.auth2.getAuthInstance()
+        .signIn({scope: "https://www.googleapis.com/auth/youtube.force-ssl"})
+        .then(function() { console.log("Sign-in successful"); },
+              function(err) { console.error("Error signing in", err); });
+  }
+  function loadClient() {
+    gapi.client.setApiKey("api-key");
+    return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
+        .then(function() { console.log("GAPI client loaded for API"); },
+              function(err) { console.error("Error loading GAPI client for API", err); });
+  }
+  // Make sure the client is loaded and sign-in is complete before calling this method.
+  function execute() {
+    return gapi.client.youtube.liveBroadcasts.insert({
+      "part": "snippet,status,contentDetails",
+      "resource": {
+        "snippet": {
+          "title": "Testing NodeJs 123",
+          "scheduledStartTime": "2019-09-15T17:00:00+05:30",
+          "scheduledEndTime": "2019-09-16T17:00:00+05:30"
+        },
+        "status": {
+          "privacyStatus": "unlisted",
+          "recordingStatus": "recording"
+        },
+        "contentDetails": {
+          "monitorStream": {
+            "enableMonitorStream": true
+          }
+        }
+      }
+    })
+        .then(function(response) {
+                // Handle the results here (response.result has the parsed body).
+                console.log("Response", response);
+              },
+              function(err) { console.error("Execute error", err); });
+  }
+  gapi.load("client:auth2", function() {
+    gapi.auth2.init({client_id: "client-id"});
+  });
+</script>
+<button onclick="authenticate().then(loadClient)">authorize and load</button>
+<button onclick="execute()">execute</button>
