@@ -18,7 +18,7 @@ var list_upcoming_broadcast_response, getvideo_id, getchannelid,getvideotitle,ge
               function(err) { console.error("Error signing in", err); });
   }
   function loadClient() {
-    gapi.client.setApiKey("AIzaSyAdFQnrpVVDnKSNFBZSJY_jvK18YvWN6D0");
+    gapi.client.setApiKey("");
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         .then(function() { console.log("GAPI client loaded for API"); },
               function(err) { console.error("Error loading GAPI client for API", err); });
@@ -68,7 +68,7 @@ var list_upcoming_broadcast_response, getvideo_id, getchannelid,getvideotitle,ge
       "resource": {
         "snippet": {
           "title": "Testing NodeJs 123",
-          "channelId": "UC_kfEIcdTVHfe_b-JjOKaSg"
+          "channelId": ""
         },
         "id": "Jy0RgpPo49c",
         "status": {
@@ -129,7 +129,7 @@ console.log("broadcast status = " + getbroadcaststatus);
 }
 	
   gapi.load("client:auth2", function() {
-    gapi.auth2.init({client_id: "774268894257-9f6081gs3l8l97hq0qdrsknohul22h4a.apps.googleusercontent.com"});
+    gapi.auth2.init({client_id: ""});
   });
 </script>
 </br>
